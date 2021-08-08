@@ -3,6 +3,9 @@
 
 - `Python3`
 
+![douban](./douban.png)
+![Kap](./Kap.gif)
+
 > 需要在`douban.py`文件中完善请求头
  
         headers = {
@@ -12,5 +15,3 @@
         }
 
 ![header](./header.png)
-![douban](./douban.png)
-![Kap](./Kap.gif)
