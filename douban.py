@@ -17,7 +17,13 @@ import timeit
 import re
 
 
-# 开始进程
+headers = {
+    "Accept": "",
+    "User-Agent": "",
+    "Cookie": "",
+}
+
+
 def main():
     start = timeit.default_timer()
     args = sys.argv
@@ -34,17 +40,12 @@ def main():
     print("END %ss" % round((end-start), 2))
 
 
-# 获取网页内容
+# 获取网页内容并解析
 def get_html(id):
     url = "https://movie.douban.com/subject/"+id
     print("START GET %s DATA." % url)
     try:
-        response = requests.get(url,
-                                headers={
-                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36",
-                                    "Cookie": "ll=\"108288\"; bid=ENFP8bJKbBo; __utmc=30149280; __utmz=30149280.1628305008.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=223695111; __utmz=223695111.1628305008.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _vwo_uuid_v2=D8BB4D0958BD15B71160877BAC17F2E07|00e56df8796d68c898ac642a44042099; _pk_id.100001.4cf6=e2671775cfd8e928.1628305009.3.1628325321.1628321545.; __utma=30149280.2113785278.1628305008.1628321131.1628325321.3; __utma=223695111.1381787497.1628305008.1628321131.1628325321.3",
-                                })
+        response = requests.get(url, headers=headers)
         selector = Selector(
             text=Selector(text=response.text).
             css(u'#content').
